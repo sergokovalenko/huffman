@@ -18,7 +18,7 @@ function codeToNumber(c) {
 function stringToCode(s) {
 	let ret = '';
 	for (let i = 0; i < s.length; i += 1)
-		ret += numberToCode(s.charCodeAt(i));
+		ret += `${numberToCode(s.charCodeAt(i))} `;
 	return ret;
 }
 
@@ -26,5 +26,19 @@ function codeToString(s) {
 	let ret = '';
 	for (let i = 0; i < s.length; i += 8)
 		ret += String.fromCharCode(codeToNumber(s.substring(i, i + 8)));
+	return ret;
+}
+
+export function stringToCodePrint(s) {
+	let ret = '';
+	for (let i = 0; i < s.length; i += 1)
+		ret += `${numberToCode(s.charCodeAt(i))} `;
+	return ret;
+}
+
+export function codeToStringPrint(s) {
+	let ret = '';
+	for (let i = 0; i < s.length; i += 8)
+		ret += `${String.fromCharCode(codeToNumber(s.substring(i, i + 8)))} `;
 	return ret;
 }
