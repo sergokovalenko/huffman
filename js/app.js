@@ -10,7 +10,8 @@ window.onload = () => {
     e.preventDefault();
 
     const value = input.value;
+    const compressedInfo = obj.pack(value);
     firstResultBlock.innerText = obj.stringToCodePrint(value);
-    secondResultBlock.innerText = obj.pack(value);
+    secondResultBlock.innerText = obj.getCompressedValue(compressedInfo);
   });
 };
