@@ -11,6 +11,6 @@ window.onload = () => {
 
     const value = input.value;
     firstResultBlock.innerText = obj.stringToCodePrint(value);
-    secondResultBlock.innerText = 'Still in progress...';
+    secondResultBlock.innerText = obj.pack(value);
   });
 };
