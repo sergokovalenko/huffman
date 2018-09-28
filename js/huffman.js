@@ -34,7 +34,7 @@ function getMin(obj) {
 	let propName = '';
 
 	for (const prop in obj) {
-		if ((obj[prop].count < min) && (obj[prop].use == false)) {
+		if ((obj[prop].count < min) && (obj[prop].use === false)) {
 			min = obj[prop].count;
 			propName = prop;
 		}
@@ -61,7 +61,7 @@ export function pack(str) {
 	const obj = {};
 
 	for (let i = 0; i < str.length; i++) {
-		if (obj[str[i]] == null) {
+		if (obj[str[i]] === null) {
 			obj[str[i]] = {
 				count: 0,
 				code: '',
@@ -74,13 +74,13 @@ export function pack(str) {
 	for (let r in obj) {
 		const prop1 = getMin(obj);
 
-		if (prop1 == '') {
+		if (prop1 === '') {
 			break;
 		}
 		obj[prop1].use = true;
 
 		var prop2 = getMin(obj);
-		if (prop2 == '') {
+		if (prop2 === '') {
 			break;
 		}
 		obj[prop2].use = true;
@@ -100,7 +100,7 @@ export function pack(str) {
 
 	const compressedValueInfo = {};
 	for (const prop in obj) {
-		if (prop.length == 1) {
+		if (prop.length === 1) {
 			compressedValueInfo[prop] = obj[prop].code;
 		}
 	}
@@ -108,14 +108,33 @@ export function pack(str) {
 	return compressedValueInfo;
 }
 
-export function getCompressedValue(compressedInfo) {
+export function getCompressedValue(compressedInfo, str) {
 	let result = '';
 
-	for (const prop in compressedInfo) {
-		if (prop.length == 1) {
-			result += `${prop} = ${compressedInfo[prop]} `;
+	for (let i = 0; i < str.length; i++) {
+		for (const prop in compressedInfo) {
+			if (prop.localeCompare(str[i]) === 0) {
+				result += `${compressedInfo[prop]} `;
+			}
 		}
 	}
+
+
+	return result;
+}
+
+export function unpack(compressedObj, str) {
+	const letters = str.split(' ');
+
+	const result = letters.reduce((acc, cur) => {
+		for (const prop in compressedObj) {
+			if (compressedObj[prop] === cur) {
+				acc += prop;
+			}
+		}
+
+		return acc;
+	}, '');
 
 	return result;
 }
