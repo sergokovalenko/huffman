@@ -15,20 +15,6 @@ function codeToNumber(c) {
 	return ret;
 }
 
-function stringToCode(s) {
-	let ret = '';
-	for (let i = 0; i < s.length; i += 1)
-		ret += `${numberToCode(s.charCodeAt(i))} `;
-	return ret;
-}
-
-function codeToString(s) {
-	let ret = '';
-	for (let i = 0; i < s.length; i += 8)
-		ret += String.fromCharCode(codeToNumber(s.substring(i, i + 8)));
-	return ret;
-}
-
 function getMin(obj) {
 	let min = Number.MAX_VALUE;
 	let propName = '';
